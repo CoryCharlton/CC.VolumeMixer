@@ -1,0 +1,87 @@
+﻿<Window x:Class="CC.VolumeMixer.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Controls="clr-namespace:CC.VolumeMixer.Controls" 
+        Title="CC.Volume Mixer [Settings]" Height="294" Width="410" Topmost="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CC.VolumeMixer;component/Resources/Settings.png" SizeToContent="Height">
+
+    <StackPanel Background="{StaticResource BackgroundBrush}">
+
+        <Border Style="{StaticResource BorderOuterStyle}" Margin="10,10,10,5">
+            <Border Style="{StaticResource BorderInnerStyle}">
+
+                <Grid HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Center" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Margin="0" VerticalAlignment="Center">Fade Speed:</TextBlock>
+                    <ComboBox Grid.Column="0" Name="ComboBoxOnScreenDisplayFadeSpeed" HorizontalAlignment="Right" Width="82" VerticalAlignment="Center"></ComboBox>
+
+                    <TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center">Color Theme:</TextBlock>
+                    <ComboBox Grid.Column="2" Name="ComboBoxOnScreenDisplayTheme" HorizontalAlignment="Right" Width="82" VerticalAlignment="Center"></ComboBox>
+                    
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="0" VerticalAlignment="Center">OSD Fade Speed:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="0" Name="ComboBoxOnScreenDisplayFadeSpeed" HorizontalAlignment="Right" VerticalAlignment="Center"></ComboBox>
+                        
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="0" VerticalAlignment="Center">OSD Color Theme:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="1" Name="ComboBoxOnScreenDisplayTheme" HorizontalAlignment="Right" VerticalAlignment="Center"></ComboBox>-->
+                </Grid>
+
+            </Border>
+        </Border>
+
+        <Border Style="{StaticResource BorderOuterStyle}" Margin="10,5">
+            <Border Style="{StaticResource BorderInnerStyle}">
+                <Grid Margin="5" VerticalAlignment="Center" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="125*"></ColumnDefinition>
+                        <ColumnDefinition Width="225"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="0" VerticalAlignment="Center">Drop Shadow Color:</TextBlock>
+                    <Controls:ColorPicker x:Name="ColorPickerOnScreenDisplayDropShadowColor" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right"  VerticalAlignment="Center" SelectedColorChanging="ColorPickerOnScreenDisplayDropShadowColor_SelectedColorChanging"></Controls:ColorPicker>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="0" VerticalAlignment="Center" >Foreground Color:</TextBlock>
+                    <Controls:ColorPicker x:Name="ColorPickerOnScreenDisplayForegroundColor" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" SelectedColorChanging="ColorPickerOnScreenDisplayForegroundColor_SelectedColorChanging"></Controls:ColorPicker>
+                </Grid>
+            </Border>
+        </Border>
+
+        <Border Style="{StaticResource BorderOuterStyle}" Grid.Row="0" Margin="10,5,10,10">
+            <Border Style="{StaticResource BorderInnerStyle}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Name="ButtonDefaults" Grid.Column="0" Margin="0,0,5,0" Click="ButtonDefaults_Click">_Defaults</Button>
+                    <Button Name="ButtonOk" Grid.Column="2" Margin="0,0,5,0" Click="ButtonOk_Click">_OK</Button>
+                    <Button Name="ButtonCancel" Grid.Column="3" Margin="2.5,0,2.5,0" Click="ButtonCancel_Click">_Cancel</Button>
+                    <Button Name="ButtonApply" Grid.Column="4" Margin="5,0,0,0" Click="ButtonApply_Click">_Apply</Button>
+                </Grid>
+            </Border>
+        </Border>
+    </StackPanel>
+</Window>
