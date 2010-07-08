@@ -20,7 +20,7 @@
                     <ComboBox Grid.Column="0" Name="ComboBoxOnScreenDisplayFadeSpeed" HorizontalAlignment="Right" Width="82" VerticalAlignment="Center"></ComboBox>
 
                     <TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center">Color Theme:</TextBlock>
-                    <ComboBox Grid.Column="2" Name="ComboBoxOnScreenDisplayTheme" HorizontalAlignment="Right" Width="82" VerticalAlignment="Center"></ComboBox>
+                    <ComboBox Grid.Column="2" Name="ComboBoxOnScreenDisplayTheme" HorizontalAlignment="Right" Width="82" VerticalAlignment="Center" SelectionChanged="ComboBoxOnScreenDisplayTheme_SelectionChanged"></ComboBox>
                     
                     <!--<Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150"></ColumnDefinition>
@@ -57,10 +57,10 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" Margin="0" VerticalAlignment="Center">Drop Shadow Color:</TextBlock>
-                    <Controls:ColorPicker x:Name="ColorPickerOnScreenDisplayDropShadowColor" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right"  VerticalAlignment="Center" SelectedColorChanging="ColorPickerOnScreenDisplayDropShadowColor_SelectedColorChanging"></Controls:ColorPicker>
+                    <Controls:ColorPicker x:Name="ColorPickerOnScreenDisplayDropShadowColor" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right"  VerticalAlignment="Center" SelectedColorChanging="ColorPickerOnScreenDisplayDropShadowColor_SelectedColorChanging" SelectedColorChanged="ColorPickerOnScreenDisplayDropShadowColor_SelectedColorChanged"></Controls:ColorPicker>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="0" VerticalAlignment="Center" >Foreground Color:</TextBlock>
-                    <Controls:ColorPicker x:Name="ColorPickerOnScreenDisplayForegroundColor" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" SelectedColorChanging="ColorPickerOnScreenDisplayForegroundColor_SelectedColorChanging"></Controls:ColorPicker>
+                    <Controls:ColorPicker x:Name="ColorPickerOnScreenDisplayForegroundColor" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" SelectedColorChanging="ColorPickerOnScreenDisplayForegroundColor_SelectedColorChanging" SelectedColorChanged="ColorPickerOnScreenDisplayForegroundColor_SelectedColorChanged"></Controls:ColorPicker>
                 </Grid>
             </Border>
         </Border>

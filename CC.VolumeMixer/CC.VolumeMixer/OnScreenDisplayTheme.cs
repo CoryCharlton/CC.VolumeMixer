@@ -34,18 +34,22 @@ namespace CC.VolumeMixer
         [XmlIgnore]
         public static OnScreenDisplayTheme Custom
         {
-            get { return _custom; }
-            private set
+            get
             {
                 if (_custom == null)
                 {
                     lock (_lockObject)
                     {
-                        _custom = new OnScreenDisplayTheme("<Custom>", Colors.White) {IsCustomTheme = true};
+                        if (_custom == null)
+                        {
+                            _custom = new OnScreenDisplayTheme("<Custom>", Colors.White) {IsCustomTheme = true};
+                        }
                     }
                 }
-                _custom = value;
+
+                return _custom;
             }
+            private set { _custom = value; }
         }
 
         [XmlIgnore]

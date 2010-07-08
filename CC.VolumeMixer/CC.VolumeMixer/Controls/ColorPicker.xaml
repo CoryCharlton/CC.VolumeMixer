@@ -17,7 +17,7 @@
         </StackPanel>
         
         <Canvas>
-            <Popup Name="PopupMain" AllowsTransparency="True" Margin="0" PopupAnimation="Fade" Width="200">
+            <Popup Name="PopupMain" AllowsTransparency="True" Margin="0" PopupAnimation="Slide" Width="200">
                 <!--<Border Style="{StaticResource BorderOuterStyle}" Margin="0">
                     <Border Style="{StaticResource BorderInnerStyle}" Padding="0">-->
                         <StackPanel Orientation="Horizontal">

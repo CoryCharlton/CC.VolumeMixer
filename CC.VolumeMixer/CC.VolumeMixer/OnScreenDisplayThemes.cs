@@ -12,7 +12,7 @@ namespace CC.VolumeMixer
             // Keep alphabetized
             _themes.Add(new OnScreenDisplayTheme("Blue", (Color)ColorConverter.ConvertFromString("#FF19A5C1")));
             _themes.Add(new OnScreenDisplayTheme("Green", (Color)ColorConverter.ConvertFromString("#FF5AC119")));
-            _themes.Add(new OnScreenDisplayTheme("Orange", (Color)ColorConverter.ConvertFromString("#FFC15719")));
+            _themes.Add(new OnScreenDisplayTheme("Orange", (Color)ColorConverter.ConvertFromString("#FFF68400")));
             _themes.Add(new OnScreenDisplayTheme("Purple", (Color)ColorConverter.ConvertFromString("#FFB619C1")));
             _themes.Add(new OnScreenDisplayTheme("Red", (Color)ColorConverter.ConvertFromString("#FFC11919")));
 
@@ -39,7 +39,10 @@ namespace CC.VolumeMixer
                 {
                     lock (_lockObject)
                     {
-                        _defaultTheme = new OnScreenDisplayTheme("Blue", (Color) ColorConverter.ConvertFromString("#FF19A5C1"));
+                        if (_defaultTheme == null)
+                        {
+                            _defaultTheme = new OnScreenDisplayTheme("Blue", (Color) ColorConverter.ConvertFromString("#FF19A5C1"));
+                        }
                     }
                 }
 

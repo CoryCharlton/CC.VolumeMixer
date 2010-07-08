@@ -25,6 +25,17 @@
             <ProgressBar.Effect>
                 <DropShadowEffect x:Name="DropShadowProgressBar" ShadowDepth="3"></DropShadowEffect>
             </ProgressBar.Effect>
+
+            <ProgressBar.Template>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Border Name="PART_Track" BorderBrush="Black" BorderThickness=".5" CornerRadius="3" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualHeight}">
+                            <Rectangle Name="PART_Indicator" Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                        </Border>
+                    </StackPanel>
+                </ControlTemplate>
+            </ProgressBar.Template>
+
         </ProgressBar>
 
         <TextBlock Name="TextBlockVolume" Grid.Column="2" FontWeight="Bold" FontSize="32" HorizontalAlignment="Left" Margin="10,0" Padding="0">

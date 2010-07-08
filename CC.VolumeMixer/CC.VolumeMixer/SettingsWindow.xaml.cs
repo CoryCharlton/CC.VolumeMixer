@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -63,12 +64,22 @@ namespace CC.VolumeMixer
             Close();
         }
 
+        private void ColorPickerOnScreenDisplayDropShadowColor_SelectedColorChanged(object sender, ColorChangeEventArgs e)
+        {
+            ComboBoxOnScreenDisplayTheme.SelectedItem = GetThemeFromSelectedColors();
+        }
+
         private void ColorPickerOnScreenDisplayDropShadowColor_SelectedColorChanging(object sender, ColorChangeEventArgs e)
         {
             if (_onScreenDisplayWindow != null)
             {
                 _onScreenDisplayWindow.VolumeBar.DropShadowColor = e.Color;
             }
+        }
+
+        private void ColorPickerOnScreenDisplayForegroundColor_SelectedColorChanged(object sender, ColorChangeEventArgs e)
+        {
+            ComboBoxOnScreenDisplayTheme.SelectedItem = GetThemeFromSelectedColors();
         }
 
         private void ColorPickerOnScreenDisplayForegroundColor_SelectedColorChanging(object sender, ColorChangeEventArgs e)
@@ -78,14 +89,38 @@ namespace CC.VolumeMixer
                 _onScreenDisplayWindow.VolumeBar.Foreground = new SolidColorBrush(e.Color);
             }
         }
+
+        private void ComboBoxOnScreenDisplayTheme_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var onScreenDisplayTheme = (OnScreenDisplayTheme) ComboBoxOnScreenDisplayTheme.SelectedItem;
+            if (onScreenDisplayTheme != OnScreenDisplayTheme.Custom)
+            {
+                ColorPickerOnScreenDisplayDropShadowColor.SelectedColor = onScreenDisplayTheme.DropShadowColor;
+                ColorPickerOnScreenDisplayForegroundColor.SelectedColor = onScreenDisplayTheme.ForegroundColor;
+            }
+        }
         #endregion
 
         #region Private Methods
+        private OnScreenDisplayTheme GetThemeFromSelectedColors()
+        {
+            var returnValue = OnScreenDisplayTheme.Custom;
+
+            foreach (var onScreenDisplayTheme in OnScreenDisplayThemes.Themes.Where(onScreenDisplayTheme => onScreenDisplayTheme.DropShadowColor == ColorPickerOnScreenDisplayDropShadowColor.SelectedColor && onScreenDisplayTheme.ForegroundColor == ColorPickerOnScreenDisplayForegroundColor.SelectedColor))
+            {
+                returnValue = onScreenDisplayTheme;
+                break;
+            }
+
+            return returnValue;
+        }
+
         private void SettingsToUI()
         {
             ColorPickerOnScreenDisplayDropShadowColor.SelectedColor = Settings.Default.OnScreenDisplayDropShadowColor;
             ColorPickerOnScreenDisplayForegroundColor.SelectedColor = Settings.Default.OnScreenDisplayForegroundColor;
             ComboBoxOnScreenDisplayFadeSpeed.SelectedItem = Settings.Default.OnScreenDisplayFadeSpeed;
+            ComboBoxOnScreenDisplayTheme.SelectedItem = Settings.Default.OnScreenDisplayTheme;
         }
         
         private void UIToSettings()
@@ -93,6 +128,7 @@ namespace CC.VolumeMixer
             Settings.Default.OnScreenDisplayDropShadowColor = ColorPickerOnScreenDisplayDropShadowColor.SelectedColor;
             Settings.Default.OnScreenDisplayFadeSpeed = (FadeSpeed) ComboBoxOnScreenDisplayFadeSpeed.SelectedItem;
             Settings.Default.OnScreenDisplayForegroundColor = ColorPickerOnScreenDisplayForegroundColor.SelectedColor;
+            Settings.Default.OnScreenDisplayTheme = (OnScreenDisplayTheme) ComboBoxOnScreenDisplayTheme.SelectedItem;
         }
         #endregion
         

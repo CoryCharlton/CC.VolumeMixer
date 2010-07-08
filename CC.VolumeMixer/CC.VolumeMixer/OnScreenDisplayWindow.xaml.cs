@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
@@ -16,6 +17,7 @@ namespace CC.VolumeMixer
             InitializeComponent();
             VolumeBar.Opacity = 0;
             CoreAudioDevice.Default.VolumeChanged += CoreAudioDevice_VolumeChanged;
+            Settings.Default.PropertyChanged += Settings_PropertyChanged;
             SetNotifyIconIcon();
 
             _contextMenu.MenuItems.Add(new MenuItem("Settings", Settings_OnClick));
@@ -49,7 +51,7 @@ namespace CC.VolumeMixer
         private readonly Icon _sound050 = Properties.Resources.Sound050;
         private readonly Icon _sound100 = Properties.Resources.Sound100;
         private readonly Icon _soundMuted = Properties.Resources.SoundMuted;
-        private readonly DoubleAnimation _volumeBarFadeAnimation = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(6))) {AutoReverse = false};
+        private readonly DoubleAnimation _volumeBarFadeAnimation = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(5))) {AutoReverse = false, AccelerationRatio = .75};
         #endregion
 
         #region Public Properties
@@ -134,6 +136,36 @@ namespace CC.VolumeMixer
             }
         }
 
+        private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case Settings.OnScreenDisplayFadeSpeedPropertyName:
+                    {
+                        switch (Settings.Default.OnScreenDisplayFadeSpeed)
+                        {
+                            case FadeSpeed.Fast:
+                                {
+                                    _volumeBarFadeAnimation.Duration = TimeSpan.FromSeconds(2.5);
+                                    break;
+                                }
+                            case FadeSpeed.Normal:
+                                {
+                                    _volumeBarFadeAnimation.Duration = TimeSpan.FromSeconds(5);
+                                    break;
+                                }
+                            case FadeSpeed.Slow:
+                                {
+                                    _volumeBarFadeAnimation.Duration = TimeSpan.FromSeconds(7.5);
+                                    break;
+                                }
+                        }
+
+                        break;
+                    }
+            }
+        }
+
         //TODO: Implement this..
         //private void NotifyIcon_MouseDown(object sender, MouseEventArgs e)
         //{
@@ -180,7 +212,7 @@ namespace CC.VolumeMixer
         #endregion
 
         #region Protected Methods
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
             _notifyIcon.Visible = false;
 
