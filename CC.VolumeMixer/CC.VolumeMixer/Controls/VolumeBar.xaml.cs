@@ -5,6 +5,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using CC.Utilities;
 using CoreAudioApi;
 
 namespace CC.VolumeMixer.Controls
@@ -15,35 +16,24 @@ namespace CC.VolumeMixer.Controls
         public VolumeBar()
         {
             InitializeComponent();
-            CoreAudioDevice.Default.VolumeChanged += CoreAudioDevice_VolumeChanged;
+            //CoreAudioDevice.Default.VolumeChanged += CoreAudioDevice_VolumeChanged;
 
-            var dropShadowColorBinding = new Binding
-                                             {
-                                                 Mode = BindingMode.OneWay,
-                                                 Path = new PropertyPath(DropShadowColorProperty),
-                                                 Source = this
-                                             };
-
-            var volumeBinding = new Binding
-                                    {
-                                        Mode = BindingMode.OneWay,
-                                        Path = new PropertyPath(CoreAudioDevice.VolumeProperty),
-                                        Source = CoreAudioDevice.Default
-                                    };
-
+            var dropShadowColorBinding = BindingHelper.CreateOneWayBinding(DropShadowColorProperty, this);
+            var volumeBinding = BindingHelper.CreateOneWayBinding(CoreAudioDevice.VolumeProperty, CoreAudioDevice.Default);
             
-            ProgressBarVolume.SetBinding(ForegroundProperty, new Binding {Mode = BindingMode.OneWay, Path = new PropertyPath(ForegroundProperty), Source = this});
+            ProgressBarVolume.SetBinding(ForegroundProperty, BindingHelper.CreateOneWayBinding(ForegroundProperty, this));
             ProgressBarVolume.SetBinding(RangeBase.ValueProperty, volumeBinding);
             TextBlockVolume.SetBinding(TextBlock.TextProperty, volumeBinding);
             VolumeIcon.SetBinding(VolumeIcon.DropShadowColorProperty, dropShadowColorBinding);
+            VolumeIcon.SetBinding(VolumeIcon.IsMutedProperty, BindingHelper.CreateOneWayBinding(CoreAudioDevice.IsMutedProperty, CoreAudioDevice.Default));
 
             BindingOperations.SetBinding(DropShadowProgressBar, DropShadowEffect.ColorProperty, dropShadowColorBinding);
             BindingOperations.SetBinding(DropShadowTextBlock, DropShadowEffect.ColorProperty, dropShadowColorBinding);
             
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                SetBinding(DropShadowColorProperty, new Binding { Mode = BindingMode.OneWay, Path = new PropertyPath(Settings.OnScreenDisplayDropShadowColorPropertyName), Source = Settings.Default });
-                SetBinding(ForegroundProperty, new Binding { Mode = BindingMode.OneWay, Path = new PropertyPath(Settings.OnScreenDisplayForegroundBrushPropertyName), Source = Settings.Default });
+                SetBinding(DropShadowColorProperty, BindingHelper.CreateOneWayBinding(Settings.OnScreenDisplayDropShadowColorPropertyName, Settings.Default));
+                SetBinding(ForegroundProperty, BindingHelper.CreateOneWayBinding(Settings.OnScreenDisplayForegroundBrushPropertyName, Settings.Default));
             }
         }
         #endregion
@@ -61,9 +51,9 @@ namespace CC.VolumeMixer.Controls
         #endregion
 
         #region Private Event Handlers
-        private void CoreAudioDevice_VolumeChanged(AudioVolumeNotificationData volumeNotificationData)
+        private void CoreAudioDevice_VolumeChanged()
         {
-            VolumeIcon.IsMuted = volumeNotificationData.Muted;
+            //VolumeIcon.IsMuted = volumeNotificationData.Muted;
         }
         #endregion
     }

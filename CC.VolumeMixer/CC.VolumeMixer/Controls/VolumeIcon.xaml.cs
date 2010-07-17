@@ -11,6 +11,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CC.Utilities;
 
 namespace CC.VolumeMixer.Controls
 {
@@ -22,25 +23,15 @@ namespace CC.VolumeMixer.Controls
 			InitializeComponent();
             IsMuted = false;
 
-            var dropShadowColorBinding = new Binding
-                                             {
-                                                 Mode = BindingMode.OneWay,
-                                                 Path = new PropertyPath(DropShadowColorProperty),
-                                                 Source = this
-                                             };
+            var dropShadowColorBinding = BindingHelper.CreateOneWayBinding(DropShadowColorProperty, this);
 
             BindingOperations.SetBinding(DropShadowVolume, DropShadowEffect.ColorProperty, dropShadowColorBinding);
             BindingOperations.SetBinding(DropShadowX, DropShadowEffect.ColorProperty, dropShadowColorBinding);
             
-            var foregroundBinding = new Binding
-		                                {
-		                                    Mode = BindingMode.OneWay,
-		                                    Path = new PropertyPath(ForegroundProperty),
-		                                    Source = this
-		                                };
+            var foregroundBinding = BindingHelper.CreateOneWayBinding(ForegroundProperty, this);
 
             PathVolume.SetBinding(Shape.FillProperty, foregroundBinding);
-            PathX.SetBinding(VisibilityProperty, new Binding { Converter = new BooleanToVisibilityConverter(), Mode = BindingMode.OneWay, Path = new PropertyPath(IsMutedProperty), Source = this });
+            PathX.SetBinding(VisibilityProperty, BindingHelper.CreateOneWayBinding(IsMutedProperty, this, new BooleanToVisibilityConverter()));
 		}
         #endregion
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
@@ -63,23 +64,10 @@ namespace CC.VolumeMixer
         #endregion
 
         #region Private Event Handlers
-        private void CoreAudioDevice_VolumeChanged(AudioVolumeNotificationData volumeNotificationData)
+        private void CoreAudioDevice_VolumeChanged(object sender, EventArgs e)
         {
             SetNotifyIconIcon();
-            VolumeBar.BeginAnimation(OpacityProperty, null);
-
-            if (Visibility != Visibility.Visible)
-            {
-                Topmost = true;
-                Visibility = Visibility.Visible;
-
-                _onTopTimer.IsEnabled = true;
-            }
-
-            if (!IsPreviewMode)
-            {
-                VolumeBar.BeginAnimation(OpacityProperty, _volumeBarFadeAnimation);
-            }
+            ShowVolumeIcon();
         }
 
         private void Exit_OnClick(object sender, EventArgs e)
@@ -189,23 +177,55 @@ namespace CC.VolumeMixer
         #region Private 
         private void SetNotifyIconIcon()
         {
-            if (CoreAudioDevice.Default.IsMuted)
+            if (!CoreAudioDevice.Default.Dispatcher.CheckAccess())
             {
-                _notifyIcon.Icon = _soundMuted;
+                CoreAudioDevice.Default.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(SetNotifyIconIcon));
             }
             else
             {
-                if (CoreAudioDevice.Default.Volume > 60)
+                if (CoreAudioDevice.Default.IsMuted)
                 {
-                    _notifyIcon.Icon = _sound100;
-                }
-                else if (CoreAudioDevice.Default.Volume > 40)
-                {
-                    _notifyIcon.Icon = _sound050;
+                    _notifyIcon.Icon = _soundMuted;
                 }
                 else
                 {
-                    _notifyIcon.Icon = _sound000;
+                    if (CoreAudioDevice.Default.Volume > 60)
+                    {
+                        _notifyIcon.Icon = _sound100;
+                    }
+                    else if (CoreAudioDevice.Default.Volume > 40)
+                    {
+                        _notifyIcon.Icon = _sound050;
+                    }
+                    else
+                    {
+                        _notifyIcon.Icon = _sound000;
+                    }
+                }
+            }
+        }
+
+        private void ShowVolumeIcon()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(ShowVolumeIcon));
+            }
+            else
+            {
+                VolumeBar.BeginAnimation(OpacityProperty, null);
+
+                if (Visibility != Visibility.Visible)
+                {
+                    Topmost = true;
+                    Visibility = Visibility.Visible;
+
+                    _onTopTimer.IsEnabled = true;
+                }
+
+                if (!IsPreviewMode)
+                {
+                    VolumeBar.BeginAnimation(OpacityProperty, _volumeBarFadeAnimation);
                 }
             }
         }

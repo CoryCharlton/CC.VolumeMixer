@@ -30,20 +30,20 @@ namespace CC.VolumeMixer
         #endregion
 
         #region Dependency Properties
-        public static DependencyProperty IsMutedProperty = DependencyProperty.Register("IsMuted", typeof(bool), typeof(CoreAudioDevice), new PropertyMetadata(false));
+        public static DependencyProperty IsMutedProperty = DependencyProperty.Register("IsMuted", typeof(bool), typeof(CoreAudioDevice), new PropertyMetadata(false, VolumePropertyChanged));
         public static DependencyProperty PeakLeftProperty = DependencyProperty.Register("PeakLeft", typeof(int), typeof(CoreAudioDevice), new PropertyMetadata(0));
         public static DependencyProperty PeakProperty = DependencyProperty.Register("Peak", typeof(int), typeof(CoreAudioDevice), new PropertyMetadata(0));
         public static DependencyProperty PeakRightProperty = DependencyProperty.Register("PeakRight", typeof(int), typeof(CoreAudioDevice), new PropertyMetadata(0));
-        public static DependencyProperty VolumeProperty = DependencyProperty.Register("Volume", typeof(int), typeof(CoreAudioDevice), new PropertyMetadata(0));
+        public static DependencyProperty VolumeProperty = DependencyProperty.Register("Volume", typeof(int), typeof(CoreAudioDevice), new PropertyMetadata(0, VolumePropertyChanged));
         #endregion
 
         #region Public Events
-        public event AudioEndpointVolumeNotificationDelegate VolumeChanged;
+        public event EventHandler VolumeChanged;
         #endregion
 
         #region Private Fields
         private readonly MMDevice _device;
-        private readonly DispatcherTimer _timer;  
+        private readonly DispatcherTimer _timer;
         #endregion
 
         #region Public Properties
@@ -98,8 +98,8 @@ namespace CC.VolumeMixer
             {
                 IsMuted = notificationData.Muted;
                 Volume = (int) (notificationData.MasterVolume*100);
-
-                OnVolumeChanged(notificationData);
+                
+                //OnVolumeChanged(notificationData);
             }
         }
 
@@ -109,15 +109,24 @@ namespace CC.VolumeMixer
             PeakLeft = (int) (_device.AudioMeterInformation.PeakValues[0]*100);
             PeakRight = (int) (_device.AudioMeterInformation.PeakValues[1]*100);
         }
+
+        private static void VolumePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var coreAudioDevice = d as CoreAudioDevice;
+            if (coreAudioDevice != null)
+            {
+                coreAudioDevice.OnVolumeChanged();
+            }
+        }
         #endregion
 
         #region Protected Methods
-        protected void OnVolumeChanged(AudioVolumeNotificationData notificationData)
+        protected void OnVolumeChanged()
         {
             var volumeChanged = VolumeChanged;
             if (volumeChanged != null)
             {
-                volumeChanged(notificationData);
+                volumeChanged.BeginInvoke(this, EventArgs.Empty, null, null);
             }
         }
         #endregion

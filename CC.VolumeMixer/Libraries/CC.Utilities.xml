@@ -4,42 +4,119 @@
         <name>CC.Utilities</name>
     </assembly>
     <members>
-        <member name="T:CC.Utilities.DataRowExtension">
+        <member name="T:CC.Utilities.Utilities">
             <summary>
-            Extensions methods for the <see cref="T:System.Data.DataRow"/> object
+            General utility methods that don't seem to fit under another namespace
             </summary>
         </member>
-        <member name="M:CC.Utilities.DataRowExtension.GetColumn``1(System.Data.DataRow,System.Int32,``0)">
+        <member name="M:CC.Utilities.Utilities.TryParse``1(System.String,``0@)">
             <summary>
-            Get the column value as <see cref="!:T"/>
+            A generic TryParse() method.
             </summary>
-            <typeparam name="T">The target <see cref="T:System.Type"/></typeparam>
-            <param name="dataRow">The <see cref="T:System.Data.DataRow"/></param>
-            <param name="columnIndex">The column index.</param>
-            <param name="defaultValue">The default value.</param>
-            <returns>The column value as <see cref="!:T"/></returns>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the </typeparam>
+            <param name="text"></param>
+            <param name="value"></param>
+            <returns></returns>
         </member>
-        <member name="M:CC.Utilities.DataRowExtension.GetColumn``1(System.Data.DataRow,System.String,``0)">
+        <member name="M:CC.Utilities.ColorExtensions.Invert(System.Drawing.Color)">
             <summary>
-            Get the column value as <see cref="!:T"/>
+            Inverts a <see cref="T:System.Drawing.Color"/>
             </summary>
-            <typeparam name="T">The target <see cref="T:System.Type"/></typeparam>
-            <param name="dataRow">The <see cref="T:System.Data.DataRow"/></param>
-            <param name="columnName">The column name.</param>
-            <param name="defaultValue">The default value.</param>
-            <returns>The column value as <see cref="!:T"/></returns>
+            <param name="color">The <see cref="T:System.Drawing.Color"/> to invert</param>
+            <returns>An inverted <see cref="T:System.Drawing.Color"/></returns>
+        </member>
+        <member name="M:CC.Utilities.ColorExtensions.ToColorRef(System.Drawing.Color)">
+            <summary>
+            Converts a <see cref="T:System.Drawing.Color"/> into a <see cref="T:System.UInt32"/> that can be used for native methods.
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CC.Utilities.ColorExtensions.Invert(System.Windows.Media.Color)">
+            <summary>
+            Inverts a <see cref="T:System.Windows.Media.Color"/>
+            </summary>
+            <param name="color">The <see cref="T:System.Windows.Media.Color"/> to invert</param>
+            <returns>An inverted <see cref="T:System.Windows.Media.Color"/></returns>
+        </member>
+        <member name="M:CC.Utilities.ColorExtensions.ToColorRef(System.Windows.Media.Color)">
+            <summary>
+            Converts a <see cref="T:System.Windows.Media.Color"/> into a <see cref="T:System.UInt32"/> that can be used for native methods.
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CC.Utilities.TimeSpanExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:System.TimeSpan"/>
+            </summary>
+        </member>
+        <member name="M:CC.Utilities.TimeSpanExtensions.ToFriendlyString(System.TimeSpan,System.Boolean)">
+            <summary>
+            Converts a TimeSpan to a formatted string
+            </summary>
+            <param name="timeSpan">The TimeSpan to convert</param>
+            <param name="showMilliseconds">Whether or not to display milliseconds</param>
+            <returns>A formatted string</returns>
+        </member>
+        <member name="T:CC.Utilities.DateTimeExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:System.DateTime"/>
+            </summary>
+        </member>
+        <member name="M:CC.Utilities.DateTimeExtensions.ToCommonDateString(System.DateTime)">
+            <summary>
+            Returns a <see cref="T:System.DateTime"/> <see cref="T:System.String"/> using ToString("MM/dd/yyyy")
+            </summary>
+            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
+            <returns>A <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:CC.Utilities.DateTimeExtensions.ToEndDate(System.DateTime)">
+            <summary>
+            Returns a <see cref="T:System.DateTime"/> with a time of 23:59:59.999
+            </summary>
+            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
+            <returns>A <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:CC.Utilities.DateTimeExtensions.ToFileDateString(System.DateTime)">
+            <summary>
+            Returns a <see cref="T:System.DateTime"/> <see cref="T:System.String"/> using ToString("MM/dd/yyyy")
+            </summary>
+            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
+            <returns>A <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:CC.Utilities.DateTimeExtensions.ToStartDate(System.DateTime)">
+            <summary>
+            Returns a <see cref="T:System.DateTime"/> with a time of 00:00:00.000
+            </summary>
+            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
+            <returns>A <see cref="T:System.String"/></returns>
+        </member>
+        <member name="T:CC.Utilities.Cryptography.Encryption">
+            <summary>
+            Provides simple <see cref="T:System.Security.Cryptography.RijndaelManaged"/> Decrypt() and Encrypt() methods using a static implementation of <see cref="T:CC.Utilities.Cryptography.SimpleEncryption"/>
+            </summary>
+        </member>
+        <member name="M:CC.Utilities.Cryptography.Encryption.Decrypt(System.String,System.String)">
+            <summary>
+            Decrypts the encrypted text
+            </summary>
+            <param name="encryptedText">The encrypted text to decrypt</param>
+            <param name="password">The password used to decrypt the text</param>
+            <returns>The plain text decrypted</returns>
+        </member>
+        <member name="M:CC.Utilities.Cryptography.Encryption.Encrypt(System.String,System.String)">
+            <summary>
+            Encrypts the plain text
+            </summary>
+            <param name="plainText">The plain text to encrypt</param>
+            <param name="password">The password used to encrypt the text</param>
+            <returns>The encrypted text</returns>
         </member>
         <member name="T:CC.Utilities.ConvertEx">
             <summary>
             A collection of conversion methods.
             </summary>
-        </member>
-        <member name="M:CC.Utilities.ConvertEx.ColorRefToColor(System.UInt32)">
-            <summary>
-            Converts a native COLORREF to a <see cref="T:System.Drawing.Color"/>
-            </summary>
-            <param name="colorRef">The native COLORREF to convert</param>
-            <returns>A <see cref="T:System.Drawing.Color"/></returns>
         </member>
         <member name="M:CC.Utilities.ConvertEx.HundredthInchToTwips(System.Int32)">
             <summary>
@@ -93,154 +170,56 @@
             <param name="twips">The twips value</param>
             <returns>A <see cref="T:System.Single"/> that respresents the number of inches</returns>
         </member>
-        <member name="T:CC.Utilities.ArgumentValue">
+        <member name="T:CC.Utilities.ThreadSafeQueue`1">
             <summary>
-            Specifies constants that indicate the state of an <see cref="T:CC.Utilities.Argument"/>'s value property.
+            Represents a thread safe <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:CC.Utilities.ThreadSafeQueue`1.Clear">
+            <summary>
+            Removes all objects from the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
             </summary>
         </member>
-        <member name="F:CC.Utilities.ArgumentValue.None">
+        <member name="M:CC.Utilities.ThreadSafeQueue`1.Dequeue">
             <summary>
-            None
+            Removes and returns the object at the beggining of the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
             </summary>
-        </member>
-        <member name="F:CC.Utilities.ArgumentValue.Optional">
-            <summary>
-            Optional
-            </summary>
-        </member>
-        <member name="F:CC.Utilities.ArgumentValue.Required">
-            <summary>
-            Required
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Argument">
-            <summary>
-            Represents a single command line argument.
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Argument.#ctor(System.String)">
-            <summary>
-            Creates a new <see cref="T:CC.Utilities.Argument"/>.
-            </summary>
-            <param name="name">The argument name.</param>
-        </member>
-        <member name="M:CC.Utilities.Argument.#ctor(System.String,CC.Utilities.ArgumentValue)">
-            <summary>
-            Creates a new <see cref="T:CC.Utilities.Argument"/>.
-            </summary>
-            <param name="name">The argument name.</param>
-            <param name="argumentValue">The state of the argument's Value property.</param>
-        </member>
-        <member name="M:CC.Utilities.Argument.#ctor(System.String,System.Boolean)">
-            <summary>
-            Creates a new <see cref="T:CC.Utilities.Argument"/>.
-            </summary>
-            <param name="name">The argument name.</param>
-            <param name="hasPrefix">True if the <see cref="T:CC.Utilities.Argument"/> has a prefix.</param>
-        </member>
-        <member name="M:CC.Utilities.Argument.#ctor(System.String,CC.Utilities.ArgumentValue,System.Boolean)">
-            <summary>
-            Creates a new <see cref="T:CC.Utilities.Argument"/>.
-            </summary>
-            <param name="name">The argument name.</param>
-            <param name="argumentValue">The state of the argument's Value property.</param>
-            <param name="hasPrefix">True if the <see cref="T:CC.Utilities.Argument"/> has a prefix.</param>
-        </member>
-        <member name="M:CC.Utilities.Argument.#ctor(System.String,CC.Utilities.ArgumentValue,System.Boolean,System.String)">
-            <summary>
-            Creates a new <see cref="T:CC.Utilities.Argument"/>.
-            </summary>
-            <param name="name">The argument name.</param>
-            <param name="argumentValue">The state of the argument's Value property.</param>
-            <param name="hasPrefix">True if the <see cref="T:CC.Utilities.Argument"/> has a prefix.</param>
-            <param name="value">The argument value.</param>
-        </member>
-        <member name="M:CC.Utilities.Argument.Clone">
-            <summary>
-            Clones this <see cref="T:CC.Utilities.Argument"/> to a new instance.
-            </summary>
-            <returns>An <see cref="T:CC.Utilities.Argument"/></returns>
-        </member>
-        <member name="M:CC.Utilities.Argument.ToString">
-            <summary>
-            Returns this <see cref="T:CC.Utilities.Argument"/> in a human readable format.
-            </summary>
-            <returns>A <see cref="T:System.String"/>.</returns>
-        </member>
-        <member name="M:CC.Utilities.Argument.ToString(System.Boolean)">
-            <summary>
-            Returns this <see cref="T:CC.Utilities.Argument"/> in a human readable format.
-            </summary>
-            <param name="detailed">True if the output should be detailed.</param>
-            <returns>A <see cref="T:System.String"/>.</returns>
-        </member>
-        <member name="P:CC.Utilities.Argument.ArgumentValue">
-            <summary>
-            The state of the <see cref="P:CC.Utilities.Argument.Value"/> property.
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Argument.HasPrefix">
-            <summary>
-            True if the <see cref="T:CC.Utilities.Argument"/> has a prefix.
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Argument.Name">
-            <summary>
-            The name.
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Argument.IsValid">
-            <summary>
-            True if the <see cref="T:CC.Utilities.Argument"/> is valid.
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Argument.Value">
-            <summary>
-            The value.
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.User32">
-            <summary>
-            Contains Native Windows API from user32.dll
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Interop.User32.GetClientRect(System.IntPtr,CC.Utilities.Interop.RECT)">
-            <summary>
-            The GetClientRect function retrieves the coordinates of a window's client area. The client coordinates specify the upper-left and lower-right corners of the client area. Because client coordinates are relative to the upper-left corner of a window's client area, the coordinates of the upper-left corner are (0,0).
-            </summary>
-            <param name="hWnd">[in] Handle to the window whose client coordinates are to be retrieved.</param>
-            <param name="lpRect">[out] A <see cref="T:CC.Utilities.Interop.RECT"/> that receives the client coordinates. The left and top members are zero. The right and bottom members contain the width and height of the window.</param>
             <returns></returns>
         </member>
-        <member name="T:CC.Utilities.ControlExtensions">
+        <member name="M:CC.Utilities.ThreadSafeQueue`1.Enqueue(`0)">
             <summary>
-            Contains extension methods for <see cref="T:System.Windows.Forms.Control"/>
+            Adds an object to the end of the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
+            </summary>
+            <param name="item">The object to add to the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/></param>
+        </member>
+        <member name="M:CC.Utilities.ThreadSafeQueue`1.TrimExcess">
+            <summary>
+            Set the capacity to the actual number of elements in the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>, if that number is less than 90 percent of current capactity.
             </summary>
         </member>
-        <member name="M:CC.Utilities.ControlExtensions.DrawToImage(System.Windows.Forms.Control)">
+        <member name="M:CC.Utilities.ThreadSafeQueue`1.TryDequeue(`0@)">
             <summary>
-            Draws the <see cref="T:System.Windows.Forms.Control"/> to an <see cref="T:System.Drawing.Image"/>
+            Attempts to remove and return the object at the beggining of the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
             </summary>
-            <param name="control">The <see cref="T:System.Windows.Forms.Control"/> to draw.</param>
-            <returns>An <see cref="T:System.Drawing.Image"/> of the <see cref="T:System.Windows.Forms.Control"/></returns>
+            <param name="item">The <see cref="!:T"/> to return</param>
+            <returns></returns>
         </member>
-        <member name="T:CC.Utilities.ColorExtensions">
+        <member name="P:CC.Utilities.ThreadSafeQueue`1.Count">
             <summary>
-            Contains <see cref="T:System.Drawing.Color"/> extension methods
+            Gets the number of elements contained in the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
             </summary>
         </member>
-        <member name="M:CC.Utilities.ColorExtensions.Invert(System.Drawing.Color)">
+        <member name="T:CC.Utilities.ObjectExtensions">
             <summary>
-            Inverts a <see cref="T:System.Drawing.Color"/>
+            Contains extension methods for <see cref="T:System.Object"/>
             </summary>
-            <param name="color">The <see cref="T:System.Drawing.Color"/> to invert</param>
-            <returns>An inverted <see cref="T:System.Drawing.Color"/></returns>
         </member>
-        <member name="M:CC.Utilities.ColorExtensions.ToColorRef(System.Drawing.Color)">
+        <member name="M:CC.Utilities.ObjectExtensions.ToXml(System.Object)">
             <summary>
-            Converts a <see cref="T:System.Drawing.Color"/> into a <see cref="T:System.UInt32"/> that can be used for native methods.
+            Converts an object to a serialized xml string
             </summary>
-            <param name="color"></param>
+            <param name="o">The <see cref="T:System.Object"/> to serialize</param>
             <returns></returns>
         </member>
         <member name="T:CC.Utilities.SerializableDictionary`2">
@@ -249,103 +228,6 @@
             </summary>
             <typeparam name="TKey">The Key <see cref="T:System.Type"/></typeparam>
             <typeparam name="TValue">The Value <see cref="T:System.Type"/></typeparam>
-        </member>
-        <member name="T:CC.Utilities.Encryption">
-            <summary>
-            Provides simple <see cref="T:System.Security.Cryptography.RijndaelManaged"/> Decrypt() and Encrypt() methods using a static implementation of <see cref="T:CC.Utilities.SimpleEncryption"/>
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Encryption.Decrypt(System.String,System.String)">
-            <summary>
-            Decrypts the encrypted text
-            </summary>
-            <param name="encryptedText">The encrypted text to decrypt</param>
-            <param name="password">The password used to decrypt the text</param>
-            <returns>The plain text decrypted</returns>
-        </member>
-        <member name="M:CC.Utilities.Encryption.Encrypt(System.String,System.String)">
-            <summary>
-            Encrypts the plain text
-            </summary>
-            <param name="plainText">The plain text to encrypt</param>
-            <param name="password">The password used to encrypt the text</param>
-            <returns>The encrypted text</returns>
-        </member>
-        <member name="T:CC.Utilities.Interop.CFE">
-            <summary>
-            Defines constants used in a <see cref="T:CC.Utilities.Interop.CHARFORMAT"/> or <see cref="T:CC.Utilities.Interop.CHARFORMAT2"/> dwEffects
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.CFM">
-            <summary>
-            Defines constants used in a <see cref="T:CC.Utilities.Interop.CHARFORMAT"/> or <see cref="T:CC.Utilities.Interop.CHARFORMAT2"/> dwMask
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.TEXTMODE">
-            <summary>
-            enum for use with EM_GET/SETTEXTMODE
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.CFU">
-            <summary>
-            <see cref="T:CC.Utilities.Interop.CHARFORMAT"/>/<see cref="T:CC.Utilities.Interop.CHARFORMAT2"/> underline constants
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.ECO">
-            <summary>
-            Edit control options
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.ECOOP">
-            <summary>
-            Edit control options operation
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.ES">
-            <summary>
-            Edit style constants
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.PFA">
-            <summary>
-            Alignent contstants for <see cref="T:CC.Utilities.Interop.PARAFORMAT"/>/<see cref="T:CC.Utilities.Interop.PARAFORMAT2"/>
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.PFM">
-            <summary>
-            Defines constants used in a <see cref="T:CC.Utilities.Interop.PARAFORMAT"/> or <see cref="T:CC.Utilities.Interop.PARAFORMAT2"/> dwMask
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.PFN">
-            <summary>
-            Defines constants used in a <see cref="T:CC.Utilities.Interop.PARAFORMAT"/> or <see cref="T:CC.Utilities.Interop.PARAFORMAT2"/> wNumbering
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.SCF">
-            <summary>
-            Selection related constants
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.XmlNodeExtensions">
-            <summary>
-            Contains <see cref="T:System.Xml.XmlNode"/> extension methods
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.XmlNodeExtensions.AttributeValue(System.Xml.XmlNode,System.String)">
-            <summary>
-            Gets an attibute value from an <see cref="T:System.Xml.XmlNode"/>
-            </summary>
-            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/></param>
-            <param name="name">The attribute name</param>
-            <returns>The attribute value</returns>
-        </member>
-        <member name="M:CC.Utilities.XmlNodeExtensions.SelectSingleNodeInnerText(System.Xml.XmlNode,System.String)">
-            <summary>
-            Gets the InnerText of an <see cref="T:System.Xml.XmlNode"/> based on an XPath expression.
-            </summary>
-            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/></param>
-            <param name="xpath">The XPath expression</param>
-            <returns>The InnerText of the selected <see cref="T:System.Xml.XmlNode"/></returns>
         </member>
         <member name="T:CC.Utilities.CsvParser">
             <summary>
@@ -382,102 +264,204 @@
             <param name="hasHeader">True if the CSV file has a header row; False otherwise</param>
             <returns>A <see cref="T:System.Data.DataTable"/> containing the parsed CSV rows</returns>
         </member>
-        <member name="T:CC.Utilities.ArgumentParser">
+        <member name="T:CC.Utilities.Cryptography.SimpleEncryption">
             <summary>
-            <see cref="T:CC.Utilities.ArgumentParser"/> allows the user to easily parse command line arguments.
+            Provides simple <see cref="T:System.Security.Cryptography.RijndaelManaged"/> Decrypt() and Encrypt() methods. 
+            <see cref="T:CC.Utilities.Cryptography.SimpleEncryption"/> is preferred over the static <see cref="T:CC.Utilities.Cryptography.Encryption"/>
+            class if you will be performing many Decrypt/Encrypt calls using the same password.
             </summary>
         </member>
-        <member name="M:CC.Utilities.ArgumentParser.#ctor">
+        <member name="M:CC.Utilities.Cryptography.SimpleEncryption.#ctor(System.String)">
             <summary>
-            Creates a new <see cref="T:CC.Utilities.ArgumentParser"/>.
+            Creates a new <see cref="T:CC.Utilities.Cryptography.SimpleEncryption"/> instance.
+            </summary>
+            <param name="password">The password used to Decrypt/Encrypt data</param>
+        </member>
+        <member name="M:CC.Utilities.Cryptography.SimpleEncryption.Decrypt(System.String)">
+            <summary>
+            Decrypts the encrypted text
+            </summary>
+            <param name="encryptedText">The encrypted text to decrypt</param>
+            <returns>The plain text decrypted</returns>
+        </member>
+        <member name="M:CC.Utilities.Cryptography.SimpleEncryption.Encrypt(System.String)">
+            <summary>
+            Encrypts the plain text
+            </summary>
+            <param name="plainText">The plain text to encrypt</param>
+            <returns>The encrypted text</returns>
+        </member>
+        <member name="T:CC.Utilities.Logging">
+            <summary>
+            A static class responsible for logging
             </summary>
         </member>
-        <member name="M:CC.Utilities.ArgumentParser.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:CC.Utilities.Logging.EnterMethod(System.String)">
             <summary>
-            Creates a new <see cref="T:CC.Utilities.ArgumentParser"/>.
+            Log a message when you enter a method
             </summary>
-            <param name="prefixes">The list of valid prefixes.</param>
+            <param name="methodName">The name of the method</param>
+            <returns>The DateTime this method was called</returns>
         </member>
-        <member name="M:CC.Utilities.ArgumentParser.#ctor(System.Boolean)">
+        <member name="M:CC.Utilities.Logging.ExitMethod(System.String,System.DateTime)">
             <summary>
-            Creates a new <see cref="T:CC.Utilities.ArgumentParser"/>.
+            Log a message when you exit a method
             </summary>
-            <param name="requirePrefix">True if valid <see cref="T:CC.Utilities.Argument"/>s require a prefix.</param>
+            <param name="methodName">The name of the method</param>
+            <param name="enterTime">The DateTime that EnterMethod() was called</param>
         </member>
-        <member name="M:CC.Utilities.ArgumentParser.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+        <member name="M:CC.Utilities.Logging.LogException(System.Exception)">
             <summary>
-            Creates a new <see cref="T:CC.Utilities.ArgumentParser"/>.
+            Log a message that displays the contents of an exception
             </summary>
-            <param name="prefixes">The list of valid prefixes.</param>
-            <param name="requirePrefix">True if valid <see cref="T:CC.Utilities.Argument"/>s require a prefix.</param>
+            <param name="exception">The System.Exception to log</param>
         </member>
-        <member name="M:CC.Utilities.ArgumentParser.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Collections.Generic.IEnumerable{CC.Utilities.Argument})">
+        <member name="M:CC.Utilities.Logging.LogMessage(System.String)">
             <summary>
-            Creates a new <see cref="T:CC.Utilities.ArgumentParser"/>.
+            Log a message
             </summary>
-            <param name="prefixes">The list of valid prefixes.</param>
-            <param name="requirePrefix">True if valid <see cref="T:CC.Utilities.Argument"/>s require a prefix.</param>
-            <param name="allowedArguments">The list of allowed <see cref="T:CC.Utilities.Argument"/>s.</param>
+            <param name="message">The message to log</param>
         </member>
-        <member name="M:CC.Utilities.ArgumentParser.AddAllowedArgument(System.String)">
+        <member name="M:CC.Utilities.Logging.LogMessage(System.String,System.Object[])">
             <summary>
-            Add an allowed <see cref="T:CC.Utilities.Argument"/>.
+            Log a message
             </summary>
-            <param name="argumentName">The argument name.</param>
+            <param name="message">The message format</param>
+            <param name="args">The arguments used in the message format</param>
         </member>
-        <member name="M:CC.Utilities.ArgumentParser.AddAllowedArgument(CC.Utilities.Argument)">
+        <member name="T:CC.Utilities.DataTableExtensions">
             <summary>
-            Add an allowed <see cref="T:CC.Utilities.Argument"/>.
-            </summary>
-            <param name="argument">The <see cref="T:CC.Utilities.Argument"/>.</param>
-        </member>
-        <member name="M:CC.Utilities.ArgumentParser.Parse(System.String[])">
-            <summary>
-            Parse the array of command line arguments.
-            </summary>
-            <param name="args">The array of command line arguments.</param>
-        </member>
-        <member name="M:CC.Utilities.ArgumentParser.ToString">
-            <summary>
-            Returns this <see cref="P:CC.Utilities.ArgumentParser.ParsedArguments"/> in a human readable format.
-            </summary>
-            <returns>A <see cref="T:System.String"/>.</returns>
-        </member>
-        <member name="M:CC.Utilities.ArgumentParser.ToString(System.Boolean)">
-            <summary>
-            Returns this <see cref="P:CC.Utilities.ArgumentParser.ParsedArguments"/> in a human readable format.
-            </summary>
-            <param name="detailed">True if the output should be detailed.</param>
-            <returns>A <see cref="T:System.String"/>.</returns>
-        </member>
-        <member name="P:CC.Utilities.ArgumentParser.AllowedArguments">
-            <summary>
-            The list of allowed <see cref="T:CC.Utilities.Argument"/>s
+            Contains extension methods for <see cref="T:System.Data.DataTable"/>
             </summary>
         </member>
-        <member name="P:CC.Utilities.ArgumentParser.ParsedArguments">
+        <member name="M:CC.Utilities.DataTableExtensions.NewRow(System.Data.DataTable,System.Collections.Generic.IList{System.Object})">
             <summary>
-            The <see cref="T:CC.Utilities.Argument"/>s parsed from the <see cref="M:CC.Utilities.ArgumentParser.Parse(System.String[])"/> method.
+            Creates a new <see cref="T:System.Data.DataRow"/> with the same schema as the table using a <see cref="T:System.Collections.Generic.IList`1"/> for column values.
+            </summary>
+            <param name="dataTable">The <see cref="T:System.Data.DataTable"/></param>
+            <param name="columnValues">The values used to populate the columns</param>
+            <returns></returns>
+        </member>
+        <member name="T:CC.Utilities.DataRowExtensions">
+            <summary>
+            Extensions methods for the <see cref="T:System.Data.DataRow"/> object
             </summary>
         </member>
-        <member name="P:CC.Utilities.ArgumentParser.Prefixes">
+        <member name="M:CC.Utilities.DataRowExtensions.GetColumn``1(System.Data.DataRow,System.Int32,``0)">
             <summary>
-            The list of valid prefixes.
+            Get the column value as <see cref="!:T"/>
+            </summary>
+            <typeparam name="T">The target <see cref="T:System.Type"/></typeparam>
+            <param name="dataRow">The <see cref="T:System.Data.DataRow"/></param>
+            <param name="columnIndex">The column index.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns>The column value as <see cref="!:T"/></returns>
+        </member>
+        <member name="M:CC.Utilities.DataRowExtensions.GetColumn``1(System.Data.DataRow,System.String,``0)">
+            <summary>
+            Get the column value as <see cref="!:T"/>
+            </summary>
+            <typeparam name="T">The target <see cref="T:System.Type"/></typeparam>
+            <param name="dataRow">The <see cref="T:System.Data.DataRow"/></param>
+            <param name="columnName">The column name.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns>The column value as <see cref="!:T"/></returns>
+        </member>
+        <member name="T:CC.Utilities.XmlNodeExtensions">
+            <summary>
+            Contains <see cref="T:System.Xml.XmlNode"/> extension methods
             </summary>
         </member>
-        <member name="P:CC.Utilities.ArgumentParser.RequirePrefix">
+        <member name="M:CC.Utilities.XmlNodeExtensions.AttributeValue(System.Xml.XmlNode,System.String)">
             <summary>
-            True if valid <see cref="T:CC.Utilities.Argument"/>s require a prefix.
+            Gets an attibute value from an <see cref="T:System.Xml.XmlNode"/>
+            </summary>
+            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/></param>
+            <param name="name">The attribute name</param>
+            <returns>The attribute value</returns>
+        </member>
+        <member name="M:CC.Utilities.XmlNodeExtensions.SelectSingleNodeInnerText(System.Xml.XmlNode,System.String)">
+            <summary>
+            Gets the InnerText of an <see cref="T:System.Xml.XmlNode"/> based on an XPath expression.
+            </summary>
+            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/></param>
+            <param name="xpath">The XPath expression</param>
+            <returns>The InnerText of the selected <see cref="T:System.Xml.XmlNode"/></returns>
+        </member>
+        <member name="T:CC.Utilities.ControlExtensions">
+            <summary>
+            Contains extension methods for Control
             </summary>
         </member>
-        <member name="P:CC.Utilities.ArgumentParser.CommonPrefixes">
+        <member name="T:CC.Utilities.Rss.RssChannel">
             <summary>
-            A list of common prefixes.
+            Represents an RSS Channel in a RSS 2.0 XML document
             </summary>
         </member>
-        <member name="P:CC.Utilities.ArgumentParser.CommonSplitters">
+        <member name="M:CC.Utilities.Rss.RssChannel.#ctor(System.Xml.XmlNode)">
             <summary>
-            A list of common parameter splitters.
+            Creates a new <see cref="T:CC.Utilities.Rss.RssChannel"/> from a <see cref="T:System.Xml.XmlNode"/>
+            </summary>
+            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/> use to create the <see cref="T:CC.Utilities.Rss.RssChannel"/></param>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Description">
+            <summary>
+            The description
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Link">
+            <summary>
+            The link
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Title">
+            <summary>
+            The title
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Category">
+            <summary>
+            The category
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Copyright">
+            <summary>
+            The copyright
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Docs">
+            <summary>
+            The docs
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Generator">
+            <summary>
+            The generator
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Items">
+            <summary>
+            The items
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Language">
+            <summary>
+            The language
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.ManagingEditor">
+            <summary>
+            The managing editor
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.Ttl">
+            <summary>
+            The ttl
+            </summary>
+        </member>
+        <member name="P:CC.Utilities.Rss.RssChannel.WebMaster">
+            <summary>
+            The webmaster
             </summary>
         </member>
         <member name="T:CC.Utilities.Rss.RssItem">
@@ -552,222 +536,52 @@
             The title
             </summary>
         </member>
-        <member name="T:CC.Utilities.Interop.EM">
+        <member name="T:CC.Utilities.Rss.RssEnclosure">
             <summary>
-            Event Message constants
+            Represents a RSS enclosure.
             </summary>
         </member>
-        <member name="T:CC.Utilities.Interop.FW">
+        <member name="M:CC.Utilities.Rss.RssEnclosure.#ctor">
             <summary>
-            Font weights
+            Create a new <see cref="T:CC.Utilities.Rss.RssEnclosure"/>.
             </summary>
         </member>
-        <member name="T:CC.Utilities.Interop.SB">
+        <member name="M:CC.Utilities.Rss.RssEnclosure.#ctor(System.Xml.XmlNode)">
             <summary>
-            Scrollbar constants
+            Create a new <see cref="T:CC.Utilities.Rss.RssEnclosure"/> from a <see cref="T:System.Xml.XmlNode"/>.
             </summary>
+            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/> to parse.</param>
         </member>
-        <member name="T:CC.Utilities.Interop.SIF">
+        <member name="M:CC.Utilities.Rss.RssEnclosure.op_Equality(CC.Utilities.Rss.RssEnclosure,CC.Utilities.Rss.RssEnclosure)">
             <summary>
-            SCROLLINFO fMask constants
+            Determines if both <see cref="T:CC.Utilities.Rss.RssEnclosure"/> are equal
             </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.WM">
-            <summary>
-            Window messages
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Interop.WS">
-            <summary>
-            Window styles
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Drawing.FontBuilder">
-            <summary>
-            Static "extension" methods used to build <see cref="T:System.Drawing.Font"/>
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Drawing.FontBuilder.FromFontNames(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit)">
-            <summary>
-            Creates a new <see cref="T:System.Drawing.Font"/> based on a list of <see cref="T:System.Drawing.Font"/> names used for fallback.
-            </summary>
-            <param name="fontNames">The comma seperated list of <see cref="T:System.Drawing.Font"/> names</param>
-            <param name="emSize">The size of the new <see cref="T:System.Drawing.Font"/></param>
-            <param name="style">The <see cref="T:System.Drawing.FontStyle"/> of the new <see cref="T:System.Drawing.Font"/></param>
-            <param name="unit">The <see cref="T:System.Drawing.GraphicsUnit"/> of the new <see cref="T:System.Drawing.Font"/></param>
+            <param name="x"></param>
+            <param name="y"></param>
             <returns></returns>
         </member>
-        <member name="M:CC.Utilities.Drawing.FontBuilder.FromString(System.String)">
+        <member name="M:CC.Utilities.Rss.RssEnclosure.op_Inequality(CC.Utilities.Rss.RssEnclosure,CC.Utilities.Rss.RssEnclosure)">
             <summary>
-            Creates a <see cref="T:System.Drawing.Font"/> from a string generated by either <see cref="T:System.Drawing.Font"/>.ToString() or <see cref="T:System.Drawing.Font"/>.ToStringEx()
+            Determines if both <see cref="T:CC.Utilities.Rss.RssEnclosure"/> are not equal
             </summary>
-            <param name="fontString">The string to build the <see cref="T:System.Drawing.Font"/> from</param>
-            <returns>A <see cref="T:System.Drawing.Font"/> from the supplied string</returns>
-        </member>
-        <member name="M:CC.Utilities.FontExtensions.ToStringEx(System.Drawing.Font)">
-            <summary>
-            Extends the <see cref="M:System.Drawing.Font.ToString"/>  method for parameters that are not included
-            </summary>
-            <param name="font">The <see cref="T:System.Drawing.Font"/> to convert to a string</param>
-            <returns>Returns a human readable representation of this <see cref="T:System.Drawing.Font"/></returns>
-        </member>
-        <member name="T:CC.Utilities.Utilities">
-            <summary>
-            General utility methods that don't seem to fit under another namespace
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Utilities.CaptureScreen">
-            <summary>
-            Captures an <see cref="T:System.Drawing.Image"/> of the screen
-            </summary>
-            <returns>An <see cref="T:System.Drawing.Image"/> of the screen</returns>
-        </member>
-        <member name="M:CC.Utilities.Utilities.CaptureWindow(System.IntPtr)">
-            <summary>
-            Captures an <see cref="T:System.Drawing.Image"/> of the specified window
-            </summary>
-            <param name="handle">The handle of the window to capture</param>
-            <returns>An <see cref="T:System.Drawing.Image"/> of the specified window</returns>
-        </member>
-        <member name="M:CC.Utilities.Utilities.TryParse``1(System.String,``0@)">
-            <summary>
-            A generic TryParse() method.
-            </summary>
-            <typeparam name="T">The <see cref="T:System.Type"/> of the </typeparam>
-            <param name="text"></param>
-            <param name="value"></param>
+            <param name="x"></param>
+            <param name="y"></param>
             <returns></returns>
         </member>
-        <member name="T:CC.Utilities.Logging">
+        <member name="P:CC.Utilities.Rss.RssEnclosure.Length">
             <summary>
-            A static class responsible for logging
+            The length
             </summary>
         </member>
-        <member name="M:CC.Utilities.Logging.EnterMethod(System.String)">
+        <member name="P:CC.Utilities.Rss.RssEnclosure.Type">
             <summary>
-            Log a message when you enter a method
-            </summary>
-            <param name="methodName">The name of the method</param>
-            <returns>The DateTime this method was called</returns>
-        </member>
-        <member name="M:CC.Utilities.Logging.ExitMethod(System.String,System.DateTime)">
-            <summary>
-            Log a message when you exit a method
-            </summary>
-            <param name="methodName">The name of the method</param>
-            <param name="enterTime">The DateTime that EnterMethod() was called</param>
-        </member>
-        <member name="M:CC.Utilities.Logging.LogException(System.Exception)">
-            <summary>
-            Log a message that displays the contents of an exception
-            </summary>
-            <param name="exception">The System.Exception to log</param>
-        </member>
-        <member name="M:CC.Utilities.Logging.LogMessage(System.String)">
-            <summary>
-            Log a message
-            </summary>
-            <param name="message">The message to log</param>
-        </member>
-        <member name="M:CC.Utilities.Logging.LogMessage(System.String,System.Object[])">
-            <summary>
-            Log a message
-            </summary>
-            <param name="message">The message format</param>
-            <param name="args">The arguments used in the message format</param>
-        </member>
-        <member name="T:CC.Utilities.DirectoryEx">
-            <summary>
-            Don't use this right now :-)
+            The type
             </summary>
         </member>
-        <member name="M:CC.Utilities.DirectoryEx.Move(System.String,System.String)">
+        <member name="P:CC.Utilities.Rss.RssEnclosure.Url">
             <summary>
-            Moves a directory and it's contents to a new location.
+            The url
             </summary>
-            <param name="sourceDirectory">The path of the directory to move.</param>
-            <param name="destinationDirectory">The path to the new location</param>
-        </member>
-        <member name="M:CC.Utilities.DirectoryEx.Move(System.String,System.String,System.Boolean)">
-            <summary>
-            Moves a directory and it's contents to a new location.
-            </summary>
-            <param name="sourceDirectory">The path of the directory to move.</param>
-            <param name="destinationDirectory">The path to the new location</param>
-            <param name="overwrite">true if the destination can be overwritten; otherwise false</param>
-        </member>
-        <member name="M:CC.Utilities.DirectoryEx.Move(System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Moves a directory and it's contents to a new location.
-            </summary>
-            <param name="sourceDirectory">The path of the directory to move.</param>
-            <param name="destinationDirectory">The path to the new location</param>
-            <param name="overwrite">true if the destination can be overwritten; otherwise false</param>
-            <param name="moveEmptyDirectories">true if the empty directories should be moved; otherwise false</param>
-        </member>
-        <member name="M:CC.Utilities.DirectoryEx.Move2(System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Moves a directory and it's contents to a new location.
-            </summary>
-            <param name="sourceDirectory">The path of the directory to move.</param>
-            <param name="destinationDirectory">The path to the new location</param>
-            <param name="overwrite">true if the destination can be overwritten; otherwise false</param>
-            <param name="moveEmptyDirectories">true if the empty directories should be moved; otherwise false</param>
-        </member>
-        <member name="M:CC.Utilities.DirectoryEx.Move3(System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Moves a directory and it's contents to a new location.
-            </summary>
-            <param name="sourceDirectory">The path of the directory to move.</param>
-            <param name="destinationDirectory">The path to the new location</param>
-            <param name="overwrite">true if the destination can be overwritten; otherwise false</param>
-            <param name="moveEmptyDirectories">true if the empty directories should be moved; otherwise false</param>
-        </member>
-        <member name="T:CC.Utilities.TimeSpanExtensions">
-            <summary>
-            Contains extension methods for <see cref="T:System.TimeSpan"/>
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.TimeSpanExtensions.ToFriendlyString(System.TimeSpan,System.Boolean)">
-            <summary>
-            Converts a TimeSpan to a formatted string
-            </summary>
-            <param name="timeSpan">The TimeSpan to convert</param>
-            <param name="showMilliseconds">Whether or not to display milliseconds</param>
-            <returns>A formatted string</returns>
-        </member>
-        <member name="T:CC.Utilities.DateTimeExtensions">
-            <summary>
-            Contains extension methods for <see cref="T:System.DateTime"/>
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.DateTimeExtensions.ToCommonDateString(System.DateTime)">
-            <summary>
-            Returns a <see cref="T:System.DateTime"/> <see cref="T:System.String"/> using ToString("MM/dd/yyyy")
-            </summary>
-            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
-            <returns>A <see cref="T:System.String"/></returns>
-        </member>
-        <member name="M:CC.Utilities.DateTimeExtensions.ToEndDate(System.DateTime)">
-            <summary>
-            Returns a <see cref="T:System.DateTime"/> with a time of 23:59:59.999
-            </summary>
-            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
-            <returns>A <see cref="T:System.String"/></returns>
-        </member>
-        <member name="M:CC.Utilities.DateTimeExtensions.ToFileDateString(System.DateTime)">
-            <summary>
-            Returns a <see cref="T:System.DateTime"/> <see cref="T:System.String"/> using ToString("MM/dd/yyyy")
-            </summary>
-            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
-            <returns>A <see cref="T:System.String"/></returns>
-        </member>
-        <member name="M:CC.Utilities.DateTimeExtensions.ToStartDate(System.DateTime)">
-            <summary>
-            Returns a <see cref="T:System.DateTime"/> with a time of 00:00:00.000
-            </summary>
-            <param name="dateTime">The <see cref="T:System.DateTime"/> to work with</param>
-            <returns>A <see cref="T:System.String"/></returns>
         </member>
         <member name="T:CC.Utilities.Rss.RssFeed">
             <summary>
@@ -817,45 +631,68 @@
             The url
             </summary>
         </member>
-        <member name="T:CC.Utilities.DataTableExtensions">
+        <member name="P:CC.Utilities.Rss.RssFeed.UserAgent">
             <summary>
-            Contains extension methods for <see cref="T:System.Data.DataTable"/>
+            The user-agent header to use. If set to null/string.Empty the user-agent header will not be added
             </summary>
         </member>
-        <member name="M:CC.Utilities.DataTableExtensions.NewRow(System.Data.DataTable,System.Collections.Generic.IList{System.Object})">
+        <member name="M:CC.Utilities.FontExtensions.ToStringEx(System.Drawing.Font)">
             <summary>
-            Creates a new <see cref="T:System.Data.DataRow"/> with the same schema as the table using a <see cref="T:System.Collections.Generic.IList`1"/> for column values.
+            Extends the <see cref="M:System.Drawing.Font.ToString"/>  method for parameters that are not included
             </summary>
-            <param name="dataTable">The <see cref="T:System.Data.DataTable"/></param>
-            <param name="columnValues">The values used to populate the columns</param>
-            <returns></returns>
+            <param name="font">The <see cref="T:System.Drawing.Font"/> to convert to a string</param>
+            <returns>Returns a human readable representation of this <see cref="T:System.Drawing.Font"/></returns>
         </member>
-        <member name="T:CC.Utilities.SimpleEncryption">
+        <member name="T:CC.Utilities.ImageExtensions">
             <summary>
-            Provides simple <see cref="T:System.Security.Cryptography.RijndaelManaged"/> Decrypt() and Encrypt() methods. 
-            <see cref="T:CC.Utilities.SimpleEncryption"/> is preferred over the static <see cref="T:CC.Utilities.Encryption"/>
-            class if you will be performing many Decrypt/Encrypt calls using the same password.
+            Contains extension methods for <see cref="T:System.Drawing.Image"/>
             </summary>
         </member>
-        <member name="M:CC.Utilities.SimpleEncryption.#ctor(System.String)">
+        <member name="M:CC.Utilities.ImageExtensions.AdjustBrightness(System.Drawing.Image,System.Single)">
             <summary>
-            Creates a new <see cref="T:CC.Utilities.SimpleEncryption"/> instance.
+            Creates a new <see cref="T:System.Drawing.Image"/> with an adjusted brightness.
             </summary>
-            <param name="password">The password used to Decrypt/Encrypt data</param>
+            <param name="image">The <see cref="T:System.Drawing.Image"/> to adjust brightness</param>
+            <param name="brightness">The brightness value ranging from -1.0 (decrease brightness) to 1.0 (increase brightness)</param>
+            <returns>A new <see cref="T:System.Drawing.Image"/> with an adjusted brightness</returns>
         </member>
-        <member name="M:CC.Utilities.SimpleEncryption.Decrypt(System.String)">
+        <member name="M:CC.Utilities.ImageExtensions.AdjustContrast(System.Drawing.Image,System.Single)">
             <summary>
-            Decrypts the encrypted text
+            Creates a new <see cref="T:System.Drawing.Image"/> with an adjusted contrast.
             </summary>
-            <param name="encryptedText">The encrypted text to decrypt</param>
-            <returns>The plain text decrypted</returns>
+            <param name="image">The <see cref="T:System.Drawing.Image"/> to adjust contrast</param>
+            <param name="contrast">The contrast value ranging from -1.0 (decrease contrast) to 1.0 (increase contrast)</param>
+            <returns>A new <see cref="T:System.Drawing.Image"/> with an adjusted contrast</returns>
         </member>
-        <member name="M:CC.Utilities.SimpleEncryption.Encrypt(System.String)">
+        <member name="M:CC.Utilities.ImageExtensions.Compare(System.Drawing.Image,System.Drawing.Image)">
             <summary>
-            Encrypts the plain text
+            Compare one image to another.
             </summary>
-            <param name="plainText">The plain text to encrypt</param>
-            <returns>The encrypted text</returns>
+            <param name="image">The source image.</param>
+            <param name="other">The target image.</param>
+            <returns>0 if the images are the same, -1 if the image size differs, 1 if the pixels are different.</returns>
+        </member>
+        <member name="M:CC.Utilities.ImageExtensions.GetDisabledImage(System.Drawing.Image)">
+            <summary>
+            Creates a new <see cref="T:System.Drawing.Image"/> using <see cref="M:System.Windows.Forms.ControlPaint.DrawImageDisabled(System.Drawing.Graphics,System.Drawing.Image,System.Int32,System.Int32,System.Drawing.Color)"/> and <see cref="M:CC.Utilities.ImageExtensions.AdjustBrightness(System.Drawing.Image,System.Single)"/> with a brightness value of 0.215f.
+            </summary>
+            <param name="image">The <see cref="T:System.Drawing.Image"/> to disable</param>
+            <returns>A disabled <see cref="T:System.Drawing.Image"/></returns>
+        </member>
+        <member name="M:CC.Utilities.ImageExtensions.GetDisabledImage(System.Drawing.Image,System.Single)">
+            <summary>
+            Creates a new <see cref="T:System.Drawing.Image"/> using <see cref="M:System.Windows.Forms.ControlPaint.DrawImageDisabled(System.Drawing.Graphics,System.Drawing.Image,System.Int32,System.Int32,System.Drawing.Color)"/> and <see cref="M:CC.Utilities.ImageExtensions.AdjustBrightness(System.Drawing.Image,System.Single)"/>.
+            </summary>
+            <param name="image">The <see cref="T:System.Drawing.Image"/> to disable</param>
+            <param name="brightness">The brightness value ranging from -1.0 (decrease brightness) to 1.0 (increase brightness)</param>
+            <returns>A disabled <see cref="T:System.Drawing.Image"/></returns>
+        </member>
+        <member name="M:CC.Utilities.ImageExtensions.GetRectangle(System.Drawing.Image)">
+            <summary>
+            Gets a rectangle that corresponds to the height and width of the <see cref="T:System.Drawing.Image"/>
+            </summary>
+            <param name="image">The <see cref="T:System.Drawing.Image"/> to work with</param>
+            <returns>A <see cref="T:System.Drawing.Rectangle"/> that corresponds to the height and width of the <see cref="T:System.Drawing.Image"/></returns>
         </member>
         <member name="T:CC.Utilities.Drawing.DoubleBufferedGraphics">
             <summary>
@@ -939,273 +776,100 @@
             The <see cref="T:System.Drawing.Size"/>.
             </summary>
         </member>
-        <member name="T:CC.Utilities.ThreadSafeQueue`1">
+        <member name="T:CC.Utilities.Drawing.FontBuilder">
             <summary>
-            Represents a thread safe <see cref="T:System.Collections.Generic.Queue`1"/>
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:CC.Utilities.ThreadSafeQueue`1.Clear">
-            <summary>
-            Removes all objects from the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
+            Static "extension" methods used to build <see cref="T:System.Drawing.Font"/>
             </summary>
         </member>
-        <member name="M:CC.Utilities.ThreadSafeQueue`1.Dequeue">
+        <member name="M:CC.Utilities.Drawing.FontBuilder.FromFontNames(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit)">
             <summary>
-            Removes and returns the object at the beggining of the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
+            Creates a new <see cref="T:System.Drawing.Font"/> based on a list of <see cref="T:System.Drawing.Font"/> names used for fallback.
             </summary>
+            <param name="fontNames">The comma seperated list of <see cref="T:System.Drawing.Font"/> names</param>
+            <param name="emSize">The size of the new <see cref="T:System.Drawing.Font"/></param>
+            <param name="style">The <see cref="T:System.Drawing.FontStyle"/> of the new <see cref="T:System.Drawing.Font"/></param>
+            <param name="unit">The <see cref="T:System.Drawing.GraphicsUnit"/> of the new <see cref="T:System.Drawing.Font"/></param>
             <returns></returns>
         </member>
-        <member name="M:CC.Utilities.ThreadSafeQueue`1.Enqueue(`0)">
+        <member name="M:CC.Utilities.Drawing.FontBuilder.FromString(System.String)">
             <summary>
-            Adds an object to the end of the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
+            Creates a <see cref="T:System.Drawing.Font"/> from a string generated by either <see cref="T:System.Drawing.Font"/>.ToString() or <see cref="T:System.Drawing.Font"/>.ToStringEx()
             </summary>
-            <param name="item">The object to add to the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/></param>
+            <param name="fontString">The string to build the <see cref="T:System.Drawing.Font"/> from</param>
+            <returns>A <see cref="T:System.Drawing.Font"/> from the supplied string</returns>
         </member>
-        <member name="M:CC.Utilities.ThreadSafeQueue`1.TrimExcess">
+        <member name="T:CC.Utilities.BindingHelper">
             <summary>
-            Set the capacity to the actual number of elements in the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>, if that number is less than 90 percent of current capactity.
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.ThreadSafeQueue`1.TryDequeue(`0@)">
-            <summary>
-            Attempts to remove and return the object at the beggining of the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
-            </summary>
-            <param name="item">The <see cref="!:T"/> to return</param>
-            <returns></returns>
-        </member>
-        <member name="P:CC.Utilities.ThreadSafeQueue`1.Count">
-            <summary>
-            Gets the number of elements contained in the <see cref="T:CC.Utilities.ThreadSafeQueue`1"/>
+            Provides common <see cref="T:System.Windows.Data.Binding"/> functions
             </summary>
         </member>
-        <member name="T:CC.Utilities.ImageExtensions">
+        <member name="M:CC.Utilities.BindingHelper.CreateOneWayBinding(System.Windows.DependencyProperty,System.Object)">
             <summary>
-            Contains extension methods for <see cref="T:System.Drawing.Image"/>
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.OneWay"/>
             </summary>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
-        <member name="M:CC.Utilities.ImageExtensions.AdjustBrightness(System.Drawing.Image,System.Single)">
+        <member name="M:CC.Utilities.BindingHelper.CreateOneWayBinding(System.Windows.DependencyProperty,System.Object,System.Windows.Data.IValueConverter)">
             <summary>
-            Creates a new <see cref="T:System.Drawing.Image"/> with an adjusted brightness.
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.OneWay"/>
             </summary>
-            <param name="image">The <see cref="T:System.Drawing.Image"/> to adjust brightness</param>
-            <param name="brightness">The brightness value ranging from -1.0 (decrease brightness) to 1.0 (increase brightness)</param>
-            <returns>A new <see cref="T:System.Drawing.Image"/> with an adjusted brightness</returns>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <param name="converter">The <see cref="T:System.Windows.Data.IValueConverter"/> to use.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
-        <member name="M:CC.Utilities.ImageExtensions.AdjustContrast(System.Drawing.Image,System.Single)">
+        <member name="M:CC.Utilities.BindingHelper.CreateOneWayBinding(System.String,System.Object)">
             <summary>
-            Creates a new <see cref="T:System.Drawing.Image"/> with an adjusted contrast.
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.OneWay"/>
             </summary>
-            <param name="image">The <see cref="T:System.Drawing.Image"/> to adjust contrast</param>
-            <param name="contrast">The contrast value ranging from -1.0 (decrease contrast) to 1.0 (increase contrast)</param>
-            <returns>A new <see cref="T:System.Drawing.Image"/> with an adjusted contrast</returns>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
-        <member name="M:CC.Utilities.ImageExtensions.Compare(System.Drawing.Image,System.Drawing.Image)">
+        <member name="M:CC.Utilities.BindingHelper.CreateOneWayBinding(System.String,System.Object,System.Windows.Data.IValueConverter)">
             <summary>
-            Compare one image to another.
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.OneWay"/>
             </summary>
-            <param name="image">The source image.</param>
-            <param name="other">The target image.</param>
-            <returns>0 if the images are the same, -1 if the image size differs, 1 if the pixels are different.</returns>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <param name="converter">The <see cref="T:System.Windows.Data.IValueConverter"/> to use.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
-        <member name="M:CC.Utilities.ImageExtensions.GetDisabledImage(System.Drawing.Image)">
+        <member name="M:CC.Utilities.BindingHelper.CreateTwoWayBinding(System.Windows.DependencyProperty,System.Object)">
             <summary>
-            Creates a new <see cref="T:System.Drawing.Image"/> using <see cref="M:System.Windows.Forms.ControlPaint.DrawImageDisabled(System.Drawing.Graphics,System.Drawing.Image,System.Int32,System.Int32,System.Drawing.Color)"/> and <see cref="M:CC.Utilities.ImageExtensions.AdjustBrightness(System.Drawing.Image,System.Single)"/> with a brightness value of 0.215f.
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.TwoWay"/>
             </summary>
-            <param name="image">The <see cref="T:System.Drawing.Image"/> to disable</param>
-            <returns>A disabled <see cref="T:System.Drawing.Image"/></returns>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
-        <member name="M:CC.Utilities.ImageExtensions.GetDisabledImage(System.Drawing.Image,System.Single)">
+        <member name="M:CC.Utilities.BindingHelper.CreateTwoWayBinding(System.Windows.DependencyProperty,System.Object,System.Windows.Data.IValueConverter)">
             <summary>
-            Creates a new <see cref="T:System.Drawing.Image"/> using <see cref="M:System.Windows.Forms.ControlPaint.DrawImageDisabled(System.Drawing.Graphics,System.Drawing.Image,System.Int32,System.Int32,System.Drawing.Color)"/> and <see cref="M:CC.Utilities.ImageExtensions.AdjustBrightness(System.Drawing.Image,System.Single)"/>.
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.TwoWay"/>
             </summary>
-            <param name="image">The <see cref="T:System.Drawing.Image"/> to disable</param>
-            <param name="brightness">The brightness value ranging from -1.0 (decrease brightness) to 1.0 (increase brightness)</param>
-            <returns>A disabled <see cref="T:System.Drawing.Image"/></returns>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <param name="converter">The <see cref="T:System.Windows.Data.IValueConverter"/> to use.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
-        <member name="M:CC.Utilities.ImageExtensions.GetRectangle(System.Drawing.Image)">
+        <member name="M:CC.Utilities.BindingHelper.CreateTwoWayBinding(System.String,System.Object)">
             <summary>
-            Gets a rectangle that corresponds to the height and width of the <see cref="T:System.Drawing.Image"/>
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.TwoWay"/>
             </summary>
-            <param name="image">The <see cref="T:System.Drawing.Image"/> to work with</param>
-            <returns>A <see cref="T:System.Drawing.Rectangle"/> that corresponds to the height and width of the <see cref="T:System.Drawing.Image"/></returns>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
-        <member name="T:CC.Utilities.ObjectExtensions">
+        <member name="M:CC.Utilities.BindingHelper.CreateTwoWayBinding(System.String,System.Object,System.Windows.Data.IValueConverter)">
             <summary>
-            Contains extension methods for <see cref="T:System.Object"/>
+            Creates a <see cref="T:System.Windows.Data.Binding"/> with <see cref="T:System.Windows.Data.BindingMode"/> set to <see cref="F:System.Windows.Data.BindingMode.TwoWay"/>
             </summary>
-        </member>
-        <member name="M:CC.Utilities.ObjectExtensions.ToXml(System.Object)">
-            <summary>
-            Converts an object to a serialized xml string
-            </summary>
-            <param name="o">The <see cref="T:System.Object"/> to serialize</param>
-            <returns></returns>
-        </member>
-        <member name="T:CC.Utilities.Interop.InteropConvert">
-            <summary>
-            A collection of conversion methods for native interop methods.
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Interop.InteropConvert.CFE_ToFontStyle(CC.Utilities.Interop.CFE)">
-            <summary>
-            Converts a <see cref="T:CC.Utilities.Interop.CFE"/> constant to a <see cref="T:System.Drawing.FontStyle"/>
-            </summary>
-            <param name="dwEffects">The <see cref="T:CC.Utilities.Interop.CFE"/> to convert</param>
-            <returns>A <see cref="T:System.Drawing.FontStyle"/></returns>
-        </member>
-        <member name="M:CC.Utilities.Interop.InteropConvert.CFM_ToFontStyle(CC.Utilities.Interop.CFM)">
-            <summary>
-            Converts a <see cref="T:CC.Utilities.Interop.CFM"/> constant to a <see cref="T:System.Drawing.FontStyle"/>
-            </summary>
-            <param name="dwMask">The <see cref="T:CC.Utilities.Interop.CFM"/> to convert</param>
-            <returns>A <see cref="T:System.Drawing.FontStyle"/></returns>
-        </member>
-        <member name="M:CC.Utilities.Interop.InteropConvert.FontStyleTo_CFE(System.Drawing.FontStyle)">
-            <summary>
-            Converts a <see cref="T:System.Drawing.FontStyle"/> to <see cref="T:CC.Utilities.Interop.CFE"/> constant.
-            </summary>
-            <param name="fontStyle">The <see cref="T:System.Drawing.FontStyle"/> to convert.</param>
-            <returns>A <see cref="T:CC.Utilities.Interop.CFE"/> constant</returns>
-        </member>
-        <member name="M:CC.Utilities.Interop.InteropConvert.FontStyleTo_CFM(System.Drawing.FontStyle)">
-            <summary>
-            Converts a <see cref="T:System.Drawing.FontStyle"/> to <see cref="T:CC.Utilities.Interop.CFM"/> constant.
-            </summary>
-            <param name="fontStyle">The <see cref="T:System.Drawing.FontStyle"/> to convert.</param>
-            <returns>A <see cref="T:CC.Utilities.Interop.CFM"/> constant</returns>
-        </member>
-        <member name="M:CC.Utilities.Interop.InteropConvert.HorizontalAlignmentTo_PFA(System.Windows.Forms.HorizontalAlignment)">
-            <summary>
-            Converts a <see cref="T:System.Windows.Forms.HorizontalAlignment"/> to <see cref="T:CC.Utilities.Interop.PFA"/> constant.
-            </summary>
-            <param name="alignment">The <see cref="T:System.Windows.Forms.HorizontalAlignment"/> to convert.</param>
-            <returns>A <see cref="T:CC.Utilities.Interop.PFA"/> constant.</returns>
-        </member>
-        <member name="M:CC.Utilities.Interop.InteropConvert.PFA_ToHorizontalAlignment(CC.Utilities.Interop.PFA)">
-            <summary>
-            Converts a <see cref="T:CC.Utilities.Interop.PFA"/> constant to a <see cref="T:System.Windows.Forms.HorizontalAlignment"/>.
-            </summary>
-            <param name="pfa">The <see cref="T:CC.Utilities.Interop.PFA"/> to convert.</param>
-            <returns>A <see cref="T:System.Windows.Forms.HorizontalAlignment"/></returns>
-        </member>
-        <member name="T:CC.Utilities.Rss.RssEnclosure">
-            <summary>
-            Represents a RSS enclosure.
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Rss.RssEnclosure.#ctor">
-            <summary>
-            Create a new <see cref="T:CC.Utilities.Rss.RssEnclosure"/>.
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Rss.RssEnclosure.#ctor(System.Xml.XmlNode)">
-            <summary>
-            Create a new <see cref="T:CC.Utilities.Rss.RssEnclosure"/> from a <see cref="T:System.Xml.XmlNode"/>.
-            </summary>
-            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/> to parse.</param>
-        </member>
-        <member name="M:CC.Utilities.Rss.RssEnclosure.op_Equality(CC.Utilities.Rss.RssEnclosure,CC.Utilities.Rss.RssEnclosure)">
-            <summary>
-            Determines if both <see cref="T:CC.Utilities.Rss.RssEnclosure"/> are equal
-            </summary>
-            <param name="x"></param>
-            <param name="y"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CC.Utilities.Rss.RssEnclosure.op_Inequality(CC.Utilities.Rss.RssEnclosure,CC.Utilities.Rss.RssEnclosure)">
-            <summary>
-            Determines if both <see cref="T:CC.Utilities.Rss.RssEnclosure"/> are not equal
-            </summary>
-            <param name="x"></param>
-            <param name="y"></param>
-            <returns></returns>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssEnclosure.Length">
-            <summary>
-            The length
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssEnclosure.Type">
-            <summary>
-            The type
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssEnclosure.Url">
-            <summary>
-            The url
-            </summary>
-        </member>
-        <member name="T:CC.Utilities.Rss.RssChannel">
-            <summary>
-            Represents an RSS Channel in a RSS 2.0 XML document
-            </summary>
-        </member>
-        <member name="M:CC.Utilities.Rss.RssChannel.#ctor(System.Xml.XmlNode)">
-            <summary>
-            Creates a new <see cref="T:CC.Utilities.Rss.RssChannel"/> from a <see cref="T:System.Xml.XmlNode"/>
-            </summary>
-            <param name="xmlNode">The <see cref="T:System.Xml.XmlNode"/> use to create the <see cref="T:CC.Utilities.Rss.RssChannel"/></param>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Description">
-            <summary>
-            The description
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Link">
-            <summary>
-            The link
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Title">
-            <summary>
-            The title
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Category">
-            <summary>
-            The category
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Copyright">
-            <summary>
-            The copyright
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Docs">
-            <summary>
-            The docs
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Generator">
-            <summary>
-            The generator
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Items">
-            <summary>
-            The items
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Language">
-            <summary>
-            The language
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.ManagingEditor">
-            <summary>
-            The managing editor
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.Ttl">
-            <summary>
-            The ttl
-            </summary>
-        </member>
-        <member name="P:CC.Utilities.Rss.RssChannel.WebMaster">
-            <summary>
-            The webmaster
-            </summary>
+            <param name="path">The path to the binding source property.</param>
+            <param name="source">The binding source.</param>
+            <param name="converter">The <see cref="T:System.Windows.Data.IValueConverter"/> to use.</param>
+            <returns>A new <see cref="T:System.Windows.Data.Binding"/>.</returns>
         </member>
     </members>
 </doc>
